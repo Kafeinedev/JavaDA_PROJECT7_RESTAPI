@@ -9,20 +9,26 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "curvepoint")
 public class CurvePoint {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private int curveId;
 	private Timestamp asOfDate;
 	private double term;
 	private double value;
 	private Timestamp creationDate;
+
+	public CurvePoint(int curveId, double term, double value) {
+		this.curveId = curveId;
+		this.term = term;
+		this.value = value;
+	}
 }

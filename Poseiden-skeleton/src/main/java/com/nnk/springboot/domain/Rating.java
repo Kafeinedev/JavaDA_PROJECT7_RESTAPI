@@ -16,10 +16,17 @@ import lombok.RequiredArgsConstructor;
 public class Rating {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String moodysRating;
 	private String sandPRating;
 	private String fitchRating;
 	private int orderNumber;
+
+	public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
+		this.moodysRating = moodysRating;
+		this.sandPRating = sandPRating;
+		this.fitchRating = fitchRating;
+		this.orderNumber = orderNumber;
+	}
 }

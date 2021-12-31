@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class RuleName {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	private String description;
@@ -24,4 +24,13 @@ public class RuleName {
 	private String template;
 	private String sqlStr;
 	private String sqlPart;
+
+	public RuleName(String name, String description, String json, String template, String sqlStr, String sqlPart) {
+		this.name = name;
+		this.description = description;
+		this.json = json;
+		this.template = template;
+		this.sqlStr = sqlStr;
+		this.sqlPart = sqlPart;
+	}
 }

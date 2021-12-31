@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 public class Trade {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int tradeId;
 	private String account;
 	private String type;
@@ -39,4 +39,9 @@ public class Trade {
 	private String dealType;
 	private String sourceListId;
 	private String side;
+
+	public Trade(String account, String type) {
+		this.account = account;
+		this.type = type;
+	}
 }
