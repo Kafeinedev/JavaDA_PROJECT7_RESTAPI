@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,10 +24,15 @@ public class BidList {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int BidListId;
 
+	@NotNull
 	private String account;
+
+	@NotNull
 	private String type;
+
+	@NotNull
 	private double bidQuantity;
-	private double askQUantity;
+	private double askQuantity;
 	private double bid;
 	private double ask;
 	private String benchmark;
@@ -39,7 +45,7 @@ public class BidList {
 	private String creationName;
 	private Timestamp creationDate;
 	private String revisionName;
-	private Timestamp revisionDate​;
+	private Timestamp revisionDate;
 	private String dealName;
 	private String dealType;
 	private String sourceListId;
