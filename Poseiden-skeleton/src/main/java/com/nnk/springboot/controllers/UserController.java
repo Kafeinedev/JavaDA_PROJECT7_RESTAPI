@@ -28,7 +28,7 @@ public class UserController {
 	public String home(Model model) {
 		log.info("RequestMapping @ /user/list");
 
-		model.addAttribute("userList", userService.findAllUsers());
+		model.addAttribute("users", userService.findAllUsers());
 
 		return "user/list";
 	}
