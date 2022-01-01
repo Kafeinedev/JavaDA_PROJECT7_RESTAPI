@@ -65,9 +65,7 @@ class DefaultBidServiceTests {
 
 	@Test
 	void findAllBids_whenBidsAreFound_returnListOfBid() {
-		List<BidList> arr = new ArrayList<BidList>();
-		arr.add(bid);
-		when(mockRepository.findAll()).thenReturn(arr);
+		when(mockRepository.findAll()).thenReturn(List.of(bid));
 
 		List<BidList> test = bidService.findAllBids();
 
