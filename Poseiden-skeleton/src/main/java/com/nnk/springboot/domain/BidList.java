@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,13 +26,15 @@ public class BidList {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int BidListId;
 
-	@NotNull
+	@NotBlank(message = "Account is mandatory")
+	@Size(max = 30, message = "Account length cannot excede 30 characters")
 	private String account;
 
-	@NotNull
+	@NotBlank(message = "Type is mandatory")
+	@Size(max = 30, message = "Type length cannot excede 30 characters")
 	private String type;
 
-	@NotNull
+	@Min(value = 0, message = "Bid quantity must be above zero")
 	private double bidQuantity;
 	private double askQuantity;
 	private double bid;

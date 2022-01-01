@@ -6,6 +6,13 @@ import com.nnk.springboot.domain.BidList;
 
 public interface BidService {
 
-	List<BidList> getAllBid();
+	public BidList createBid(BidList toCreate);
 
+	public List<BidList> findAllBids();
+
+	public BidList findBidById(int id);
+
+	public BidList updateBid(int id, BidList toUpdate);
+
+	public void deleteBidById(int idToDelete);
 }
