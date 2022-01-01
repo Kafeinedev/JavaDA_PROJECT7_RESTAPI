@@ -24,7 +24,7 @@ public class BidList {
 	@Id
 	@Column(name = "BidListId")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int BidListId;
+	private Integer BidListId;
 
 	@NotBlank(message = "Account is mandatory")
 	@Size(max = 30, message = "Account length cannot excede 30 characters")
@@ -35,10 +35,10 @@ public class BidList {
 	private String type;
 
 	@Min(value = 0, message = "Bid quantity must be above zero")
-	private double bidQuantity;
-	private double askQuantity;
-	private double bid;
-	private double ask;
+	private Double bidQuantity;
+	private Double askQuantity;
+	private Double bid;
+	private Double ask;
 	private String benchmark;
 	private Timestamp bidListDate;
 	private String commentary;
@@ -55,7 +55,7 @@ public class BidList {
 	private String sourceListId;
 	private String side;
 
-	public BidList(String account, String type, double bidQuantity) {
+	public BidList(String account, String type, Double bidQuantity) {
 		this.account = account;
 		this.type = type;
 		this.bidQuantity = bidQuantity;

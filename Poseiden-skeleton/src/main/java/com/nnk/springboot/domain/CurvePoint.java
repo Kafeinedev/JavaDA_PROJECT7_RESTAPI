@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,14 +22,22 @@ public class CurvePoint {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
-	private int curveId;
+	private Integer id;
+
+	@NotNull(message = "Must not be null")
+	@Min(value = -127, message = "curveId cannot be below -127")
+	@Max(value = 127, message = "curveId cannot be above 127")
+	private Integer curveId;
 	private Timestamp asOfDate;
-	private double term;
-	private double value;
+
+	@NotNull(message = "Please add a term")
+	private Double term;
+
+	@NotNull(message = "Please add a value")
+	private Double value;
 	private Timestamp creationDate;
 
-	public CurvePoint(int curveId, double term, double value) {
+	public CurvePoint(Integer curveId, Double term, Double value) {
 		this.curveId = curveId;
 		this.term = term;
 		this.value = value;

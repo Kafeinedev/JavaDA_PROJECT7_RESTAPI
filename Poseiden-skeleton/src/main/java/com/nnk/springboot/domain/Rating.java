@@ -17,13 +17,13 @@ public class Rating {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private Integer id;
 	private String moodysRating;
 	private String sandPRating;
 	private String fitchRating;
-	private int orderNumber;
+	private Integer orderNumber;
 
-	public Rating(String moodysRating, String sandPRating, String fitchRating, int orderNumber) {
+	public Rating(String moodysRating, String sandPRating, String fitchRating, Integer orderNumber) {
 		this.moodysRating = moodysRating;
 		this.sandPRating = sandPRating;
 		this.fitchRating = fitchRating;

@@ -19,13 +19,13 @@ public class Trade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int tradeId;
+	private Integer tradeId;
 	private String account;
 	private String type;
-	private double buyQuantity;
-	private double sellQuantity;
-	private double buyPrice;
-	private double sellPrice;
+	private Double buyQuantity;
+	private Double sellQuantity;
+	private Double buyPrice;
+	private Double sellPrice;
 	private String benchmark;
 	private Timestamp tradeDate;
 	private String security;
