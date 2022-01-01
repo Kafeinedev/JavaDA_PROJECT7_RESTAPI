@@ -7,6 +7,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +24,17 @@ public class Trade {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer tradeId;
+
+	@NotBlank(message = "Must not be blank")
+	@Size(max = 30, message = "Cannot containt more than 30 characters")
 	private String account;
+
+	@NotBlank(message = "Must not be blank")
+	@Size(max = 30, message = "Cannot containt more than 30 characters")
 	private String type;
+
+	@NotNull(message = "Must not be null")
+	@Min(value = 0, message = "Must be above zero")
 	private Double buyQuantity;
 	private Double sellQuantity;
 	private Double buyPrice;
