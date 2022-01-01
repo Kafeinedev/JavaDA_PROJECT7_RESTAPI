@@ -6,6 +6,7 @@ import java.util.NoSuchElementException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nnk.springboot.domain.User;
@@ -20,9 +21,15 @@ public class DefaultUserService implements UserService {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private PasswordEncoder encoder;
+
 	@Override
 	public User createUser(User toCreate) {
 		log.trace("creating a new User");
+
+		toCreate.setPassword(encoder.encode(toCreate.getPassword()));
+
 		return userRepository.save(toCreate);
 	}
 
@@ -50,6 +57,7 @@ public class DefaultUserService implements UserService {
 		});
 
 		toUpdate.setId(id);
+		toUpdate.setPassword(encoder.encode(toUpdate.getPassword()));
 
 		return userRepository.save(toUpdate);
 	}

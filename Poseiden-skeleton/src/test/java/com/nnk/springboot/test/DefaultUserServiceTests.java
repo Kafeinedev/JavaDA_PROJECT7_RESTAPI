@@ -17,6 +17,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
@@ -27,6 +28,9 @@ class DefaultUserServiceTests {
 
 	@Mock
 	private UserRepository mockRepository;
+
+	@Mock
+	private PasswordEncoder mockEncoder;
 
 	@InjectMocks
 	private DefaultUserService userService;
@@ -52,6 +56,24 @@ class DefaultUserServiceTests {
 		userService.createUser(user);
 
 		verify(mockRepository, times(1)).save(user);
+	}
+
+	@Test
+	void createUser_whenCalled_encryptPassword() {
+		when(mockRepository.save(user)).thenReturn(user);
+		when(mockEncoder.encode("password")).thenReturn("encoded");
+
+		User test = userService.createUser(user);
+
+		assertThat(test.getPassword()).isEqualTo("encoded");
+
+	}
+
+	@Test
+	void createUser_whenCalled_useEncoder() {
+		userService.createUser(user);
+
+		verify(mockEncoder, times(1)).encode("password");
 	}
 
 	@Test
@@ -129,6 +151,27 @@ class DefaultUserServiceTests {
 
 		verify(mockRepository, times(1)).findById(1);
 		verify(mockRepository, times(1)).save(user);
+	}
+
+	@Test
+	void updateUser_whenCalled_encryptPassword() {
+		when(mockRepository.findById(1)).thenReturn(Optional.of(user));
+		when(mockRepository.save(user)).thenReturn(user);
+		when(mockEncoder.encode("password")).thenReturn("encoded");
+
+		User test = userService.updateUser(1, user);
+
+		assertThat(test.getPassword()).isEqualTo("encoded");
+
+	}
+
+	@Test
+	void updateUser_whenCalled_useEncoder() {
+		when(mockRepository.findById(1)).thenReturn(Optional.of(user));
+
+		userService.updateUser(1, user);
+
+		verify(mockEncoder, times(1)).encode("password");
 	}
 
 	@Test
