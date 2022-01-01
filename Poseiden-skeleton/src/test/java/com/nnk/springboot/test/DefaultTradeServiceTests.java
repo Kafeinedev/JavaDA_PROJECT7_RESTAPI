@@ -35,7 +35,7 @@ class DefaultTradeServiceTests {
 
 	@BeforeEach
 	void setUp() {
-		trade = new Trade("Trade Account", "Type");
+		trade = new Trade("Trade Account", "Type", 1d);
 	}
 
 	@Test

@@ -13,11 +13,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "trade")
 public class Trade {
 
@@ -53,8 +53,9 @@ public class Trade {
 	private String sourceListId;
 	private String side;
 
-	public Trade(String account, String type) {
+	public Trade(String account, String type, double buyQuantity) {
 		this.account = account;
 		this.type = type;
+		this.buyQuantity = buyQuantity;
 	}
 }

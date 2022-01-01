@@ -9,11 +9,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Table(name = "rulename")
 public class RuleName {
 
