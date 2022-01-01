@@ -135,8 +135,17 @@ class DefaultBidServiceTests {
 
 	@Test
 	void deleteBidById_whenCalled_useRepository() {
-		mockRepository.deleteById(1);
+		when(mockRepository.findById(1)).thenReturn(Optional.of(bid));
+
+		bidService.deleteBidById(1);
 
 		verify(mockRepository, times(1)).deleteById(1);
+	}
+
+	@Test
+	void deleteBidById_whenBidNotFound_throw() {
+		when(mockRepository.findById(1)).thenReturn(Optional.empty());
+
+		assertThrows(NoSuchElementException.class, () -> bidService.deleteBidById(1));
 	}
 }
