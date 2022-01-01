@@ -33,7 +33,7 @@ public class DefaultBidService implements BidService {
 	}
 
 	@Override
-	public BidList findBidById(int id) throws NoSuchElementException {
+	public BidList findBidById(int id) {
 		log.trace("finding bid by id: " + id);
 		return bidListRepository.findById(id).orElseThrow(() -> {
 			log.error("Could not find Bid with id: " + id);

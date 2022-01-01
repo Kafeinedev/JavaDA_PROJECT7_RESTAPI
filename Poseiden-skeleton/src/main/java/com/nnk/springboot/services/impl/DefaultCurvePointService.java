@@ -33,7 +33,7 @@ public class DefaultCurvePointService implements CurvePointService {
 	}
 
 	@Override
-	public CurvePoint findCurvePointById(int id) throws NoSuchElementException {
+	public CurvePoint findCurvePointById(int id) {
 		log.trace("finding CurvePoint by id: " + id);
 		return curvePointRepository.findById(id).orElseThrow(() -> {
 			log.error("Could not find CurvePoint with id: " + id);
