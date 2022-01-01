@@ -65,6 +65,7 @@ public class BidListController {
 		log.info("PostMapping @ /bidList/update/" + id);
 
 		if (result.hasErrors()) {
+			bidList.setBidListId(id);
 			return "bidList/update";
 		}
 		bidService.updateBid(id, bidList);
