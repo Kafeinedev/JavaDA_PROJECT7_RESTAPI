@@ -33,7 +33,7 @@ public class User {
 	private String fullname;
 
 	@NotBlank(message = "Role is mandatory")
-	@Size(max = 125, message = "Maximum number of characters is 125")
+	@Pattern(regexp = "ADMIN|USER", message = "Role must either be 'ADMIN' or 'USER'")
 	private String role;
 
 	public User(String username, String password, String fullname, String role) {

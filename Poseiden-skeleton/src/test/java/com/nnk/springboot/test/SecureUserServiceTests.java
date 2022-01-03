@@ -17,14 +17,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.nnk.springboot.domain.User;
 import com.nnk.springboot.repositories.UserRepository;
-import com.nnk.springboot.services.impl.DefaultUserService;
+import com.nnk.springboot.services.impl.SecureUserService;
 
 @ExtendWith(MockitoExtension.class)
-class DefaultUserServiceTests {
+class SecureUserServiceTests {
 
 	@Mock
 	private UserRepository mockRepository;
@@ -33,7 +35,7 @@ class DefaultUserServiceTests {
 	private PasswordEncoder mockEncoder;
 
 	@InjectMocks
-	private DefaultUserService userService;
+	private SecureUserService userService;
 
 	private User user;
 
@@ -188,5 +190,32 @@ class DefaultUserServiceTests {
 		when(mockRepository.findById(1)).thenReturn(Optional.empty());
 
 		assertThrows(NoSuchElementException.class, () -> userService.deleteUserById(1));
+	}
+
+	@Test
+	void loadUserByUsername_whenUserIsNotFound_throw() {
+		when(mockRepository.findByUsername("user")).thenReturn(Optional.empty());
+
+		assertThrows(UsernameNotFoundException.class, () -> userService.loadUserByUsername("user"));
+	}
+
+	@Test
+	void loadUserByUsername_whenUserIsFound_returnUser() {
+		when(mockRepository.findByUsername("user")).thenReturn(Optional.of(user));
+
+		UserDetails test = userService.loadUserByUsername("user");
+
+		assertThat(test.getUsername()).isEqualTo("username");
+		assertThat(test.getPassword()).isEqualTo("password");
+		assertThat(test.getAuthorities().toString()).isEqualTo("[role]");
+	}
+
+	@Test
+	void loadUserByUsername_whenCalled_useRepository() {
+		when(mockRepository.findByUsername("user")).thenReturn(Optional.of(user));
+
+		userService.loadUserByUsername("user");
+
+		verify(mockRepository, times(1)).findByUsername("user");
 	}
 }

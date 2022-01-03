@@ -6,6 +6,10 @@ import java.util.NoSuchElementException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +18,7 @@ import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.UserService;
 
 @Service
-public class DefaultUserService implements UserService {
+public class SecureUserService implements UserService, UserDetailsService {
 
 	Logger log = LogManager.getLogger("DefaultUserService");
 
@@ -71,5 +75,16 @@ public class DefaultUserService implements UserService {
 		});
 
 		userRepository.deleteById(idToDelete);
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		User user = userRepository.findByUsername(username).orElseThrow(() -> {
+			log.error("Could not find user with name: " + username);
+			return new UsernameNotFoundException(username);
+		});
+
+		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
+				List.of(new SimpleGrantedAuthority(user.getRole())));
 	}
 }
