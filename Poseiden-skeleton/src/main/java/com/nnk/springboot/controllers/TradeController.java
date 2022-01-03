@@ -49,7 +49,7 @@ public class TradeController {
 		}
 		tradeService.createTrade(trade);
 
-		return "trade/add";
+		return "redirect:/trade/list";
 	}
 
 	@GetMapping("/trade/update/{id}")

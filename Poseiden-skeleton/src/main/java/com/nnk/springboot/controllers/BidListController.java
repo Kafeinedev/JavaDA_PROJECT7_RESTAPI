@@ -48,7 +48,7 @@ public class BidListController {
 		}
 		bidService.createBid(bidList);
 
-		return "bidList/add";
+		return "redirect:/bidList/list";
 	}
 
 	@GetMapping("/bidList/update/{id}")

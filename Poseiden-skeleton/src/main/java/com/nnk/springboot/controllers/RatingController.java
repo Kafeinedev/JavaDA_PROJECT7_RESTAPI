@@ -49,7 +49,7 @@ public class RatingController {
 		}
 		ratingService.createRating(rating);
 
-		return "rating/add";
+		return "redirect:/rating/list";
 	}
 
 	@GetMapping("/rating/update/{id}")

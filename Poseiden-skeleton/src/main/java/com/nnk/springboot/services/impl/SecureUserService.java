@@ -79,6 +79,7 @@ public class SecureUserService implements UserService, UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		log.trace("loading UserDetails with username: " + username);
 		User user = userRepository.findByUsername(username).orElseThrow(() -> {
 			log.error("Could not find user with name: " + username);
 			return new UsernameNotFoundException(username);

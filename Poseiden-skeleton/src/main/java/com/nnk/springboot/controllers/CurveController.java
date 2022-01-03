@@ -49,7 +49,7 @@ public class CurveController {
 		}
 		curvePointService.createCurvePoint(curvePoint);
 
-		return "curvePoint/add";
+		return "redirect:/curvePoint/list";
 	}
 
 	@GetMapping("/curvePoint/update/{id}")
