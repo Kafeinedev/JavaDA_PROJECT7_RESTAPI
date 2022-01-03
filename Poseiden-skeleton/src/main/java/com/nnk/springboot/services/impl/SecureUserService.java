@@ -20,7 +20,7 @@ import com.nnk.springboot.services.UserService;
 @Service
 public class SecureUserService implements UserService, UserDetailsService {
 
-	Logger log = LogManager.getLogger("DefaultUserService");
+	Logger log = LogManager.getLogger("SecureUserService");
 
 	@Autowired
 	private UserRepository userRepository;
