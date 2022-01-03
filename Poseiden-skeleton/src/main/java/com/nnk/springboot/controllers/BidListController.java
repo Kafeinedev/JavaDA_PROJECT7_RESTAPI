@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/*
+ * Handle CRUD request for BidList
+ */
+
 @Controller
 public class BidListController {
 

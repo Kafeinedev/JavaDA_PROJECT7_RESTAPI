@@ -3,6 +3,8 @@ package com.nnk.springboot.services.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.transaction.Transactional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import com.nnk.springboot.repositories.TradeRepository;
 import com.nnk.springboot.services.TradeService;
 
 @Service
+@Transactional
 public class DefaultTradeService implements TradeService {
 
 	Logger log = LogManager.getLogger("DefaultTradeService");

@@ -7,34 +7,45 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+/*
+ * Handle login request
+ */
 @Controller
 @RequestMapping("app")
 public class LoginController {
 
-    @Autowired
-    private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-    @GetMapping("login")
-    public ModelAndView login() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("login");
-        return mav;
-    }
+	@GetMapping("login")
+	public ModelAndView login() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login");
+		return mav;
+	}
 
-    @GetMapping("secure/article-details")
-    public ModelAndView getAllUserArticles() {
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("users", userRepository.findAll());
-        mav.setViewName("user/list");
-        return mav;
-    }
+	/*
+	 * Not accessible by anyone not logged in
+	 * 
+	 * curently redirect to user/list
+	 */
+	@GetMapping("secure/article-details")
+	public ModelAndView getAllUserArticles() {
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("users", userRepository.findAll());
+		mav.setViewName("user/list");
+		return mav;
+	}
 
-    @GetMapping("error")
-    public ModelAndView error() {
-        ModelAndView mav = new ModelAndView();
-        String errorMessage= "You are not authorized for the requested data.";
-        mav.addObject("errorMsg", errorMessage);
-        mav.setViewName("403");
-        return mav;
-    }
+	/*
+	 * Error page when user tries to access unauthorized area
+	 */
+	@GetMapping("error")
+	public ModelAndView error() {
+		ModelAndView mav = new ModelAndView();
+		String errorMessage = "You are not authorized for the requested data.";
+		mav.addObject("errorMsg", errorMessage);
+		mav.setViewName("403");
+		return mav;
+	}
 }

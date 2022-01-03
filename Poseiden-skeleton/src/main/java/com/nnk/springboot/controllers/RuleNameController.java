@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
+/*
+ * Handle CRUD request for RuleName
+ */
 @Controller
 public class RuleNameController {
 

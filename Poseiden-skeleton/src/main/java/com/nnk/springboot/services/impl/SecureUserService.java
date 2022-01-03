@@ -3,6 +3,8 @@ package com.nnk.springboot.services.impl;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+import javax.transaction.Transactional;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import com.nnk.springboot.repositories.UserRepository;
 import com.nnk.springboot.services.UserService;
 
 @Service
+@Transactional
 public class SecureUserService implements UserService, UserDetailsService {
 
 	Logger log = LogManager.getLogger("SecureUserService");

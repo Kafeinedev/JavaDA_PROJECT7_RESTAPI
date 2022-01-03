@@ -11,11 +11,16 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Allow custom security configuration
+ *
+ */
+
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	@Lazy
+	@Lazy // Avoid circular dependency
 	private UserDetailsService userDetailsService;
 
 	@Override
