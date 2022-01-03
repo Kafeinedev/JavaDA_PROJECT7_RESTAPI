@@ -29,7 +29,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.and()
 			.logout().logoutUrl("/app-logout").logoutSuccessUrl("/")
 		.and()
-			.exceptionHandling().accessDeniedPage("/app/error");
+			.exceptionHandling().accessDeniedPage("/app/error")
+		.and()
+			.oauth2Login().defaultSuccessUrl("/bidList/list");
 	}//@formatter:on
 
 	@Bean
