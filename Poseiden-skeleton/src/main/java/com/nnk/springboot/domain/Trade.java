@@ -7,9 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
 import lombok.Data;
@@ -34,7 +34,7 @@ public class Trade {
 	private String type;
 
 	@NotNull(message = "Must not be null")
-	@DecimalMin(value = "0.0", message = "Must be above zero")
+	@Positive
 	private Double buyQuantity;
 	private Double sellQuantity;
 	private Double buyPrice;

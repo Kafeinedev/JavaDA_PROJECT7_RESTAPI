@@ -8,8 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class CurvePoint {
 	private Integer id;
 
 	@NotNull(message = "Must not be null")
-	@Min(value = -127, message = "curveId cannot be below -127")
+	@Positive
 	@Max(value = 127, message = "curveId cannot be above 127")
 	private Integer curveId;
 	private Timestamp asOfDate;
